@@ -25,7 +25,8 @@
     ?>
 
     <h1>Respuesta</h1>
-    <h2>Hola : <?php echo($usuario) ?> </h2>
+    <h2 id="nombre">Hola : <?php echo($usuario) ?> </h2>
     <h2>Tu logueo es : <?= $res ?> </h2>
+    <script src="../js/inicio.js"></script>
 </body>
 </html>
