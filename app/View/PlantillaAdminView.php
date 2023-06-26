@@ -14,7 +14,7 @@
           <li><a href="">Inincio</a></li>
           <li><a href=""></a>Productos</li>
           <li><a href=""></a>Variedades</li>
-          <li><a href=""></a>Usiarios</li>
+          <li><a href="http://localhost/php3b/?C=UserController&M=index"></a>Usiarios</li>
           <li><a href=""></a>Presentacion</li>
           <li><a href=""></a>Login</li>
         </ul>
