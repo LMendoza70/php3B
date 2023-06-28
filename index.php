@@ -13,7 +13,7 @@ define('controladores','app/Controller/');
 //con el operador ternario para que lo vallan estudiando
 $control=isset($_GET['C'])?$_GET['C']:'';
 //armo mi ruta ejemplo controladores.$control."php"= app/controller/UserController.php
-$ruta=controladores.$control."php";
+$ruta=controladores.$control.".php";
 //verifivcamos si la ruta existe y si contrl no viene vacio
 if(!empty($control) && file_exists($ruta)){
     //si la variable control viene llena y la ruta existe en el archivo 

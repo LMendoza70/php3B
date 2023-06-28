@@ -1,12 +1,12 @@
 <?php
     class UserModel{
         //definimos el atributo para conectar el modelo de usuario a la base de datos
-        private UserConnection;
+        private $UserConnection;
 
         //creamos el contructor de la clase para inicializar nuestro atributo UserConnection
         public function __construct(){
             //requerimos llamar a la clase DBConnection
-            require_once('../config/DBConnection.php');
+            require_once('app/config/DBConnection.php');
             //instanciamos a UserConnection de DBConnection
             $this->UserConnection=new DBConnection();
         }

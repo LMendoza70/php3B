@@ -11,7 +11,7 @@
   </p>
   <p><a href="">Agregar Nuevo Usuario</a></p>
   <p>
-    <table >
+    <table border=1 >
         <thead>
             <td>Nombre</td>
             <td>Apellido Paterno</td>
@@ -20,41 +20,17 @@
             <td>Acciones</td>
         </thead>
         <tbody>
-            <tr>
-                <td>hola</td>
-                <td>hola</td>
-                <td>hola</td>
-                <td>hola</td>
-                <td>hola</td>
-            </tr>
-            <tr>
-                <td>gggg</td>
-                <td>gggg</td>
-                <td>gggg</td>
-                <td>gggg</td>
-                <td>ggggg</td>
-            </tr>
-            <tr>
-                <td>r</td>
-                <td>r</td>
-                <td>r</td>
-                <td>r</td>
-                <td>r</td>
-            </tr>
-            <tr>
-                <td>t</td>
-                <td>t</td>
-                <td>t</td>
-                <td>t</td>
-                <td>t</td>
-            </tr>
-            <tr>
-                <td>m</td>
-                <td>m</td>
-                <td>m</td>
-                <td>m</td>
-                <td>m</td>
-            </tr>
+            <?php
+            foreach($datos as $dato){
+                echo "<tr>";
+                echo "<td>". $dato['Nombre'] ."</td>";
+                echo "<td>". $dato['ApPaterno'] ."</td>";
+                echo "<td>". $dato['ApMaterno'] ."</td>";
+                echo "<td>". $dato['Usuario'] ."</td>";
+                echo "<td><a href=''>Editar</a> <br> <a href=''>Eliminar</a> </td>";
+                echo "</tr>";
+            }
+            ?>
         </tbody>
     </table>
   </p>
