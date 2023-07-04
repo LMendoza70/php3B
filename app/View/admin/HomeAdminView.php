@@ -15,14 +15,6 @@
     excepturi reprehenderit unde voluptatibus, quis obcaecati hic magnam
     exercitationem? Assumenda?
   </p>
-  <?= $user ?>
-  <?php
-    if($usuario==null){
-      echo "Logueo Incorrecto";
-    }else{
-      echo "Welcome dear "  ;
-    }
-  ?>
   
   <p>pagina principal del admin</p>
 </div>

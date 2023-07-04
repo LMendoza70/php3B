@@ -27,7 +27,8 @@
                 echo "<td>". $dato['ApPaterno'] ."</td>";
                 echo "<td>". $dato['ApMaterno'] ."</td>";
                 echo "<td>". $dato['Usuario'] ."</td>";
-                echo "<td><a href=''>Editar</a> <br> <a href=''>Eliminar</a> </td>";
+                echo "<td><button onclick='editar(".$dato['IdUser'].")'>Editar</button><br>
+                <button onclick='eliminar(".$dato['IdUser'].")'>Eliminar</button> </td>";
                 echo "</tr>";
             }
             ?>
@@ -35,3 +36,15 @@
     </table>
   </p>
 </div>
+<script>
+  //creamos la funcion para llmar al formulario de editar un usuario
+  function editar(id){
+    window.location.href = "http://localhost/php3b/?C=UserController&M=CallFormEdit&id="+id
+  }
+  //creamos la funcion para eliminar un usuario por medio de su id despues de confirmar con un confirm
+  function eliminar(id){
+    if(confirm("¿Desea eliminar el usuario?")){
+      window.location.href = "http://localhost/php3b/?C=UserController&M=Delete&id="+id
+    }
+  }
+</script>
