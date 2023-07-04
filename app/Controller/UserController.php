@@ -5,30 +5,30 @@ class UserController{
     private $modelo;
 
     public function index(){
-        $vista="app/View/HomeUserView.php";
+        $vista="app/View/admin/users/HomeUserView.php";
         $modelo=new UserModel();
         $datos=$modelo->getAll();
-        include_once("app/View/PlantillaAdminView.php");
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
 
     public function CallFormLogin(){
-        $vista="app/View/HomeLoginView.php";
-        include_once("app/View/PlantillaAdminView.php");
+        $vista="app/View/admin/users/HomeLoginView.php";
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
 
     public function Login(){
-        $vista="app/View/HomeAdminView.php";
+        $vista="app/View/admin/HomeAdminView.php";
         $modelo=new UserModel();
         $user=isset($_POST['user'])?$_POST['password']:'no logueado';
         $usuario=$modelo->getCredenctials( $_POST['user'],$_POST['password'] ); 
                
-        include_once("app/View/PlantillaAdminView.php");
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
 
     //creamos el metodo para llamar al formulario de agregar usuario
     public function CallUserAdd(){
-        $vista="app/View/AddUserView.php";
-        include_once("app/View/PlantillaAdminView.php");
+        $vista="app/View/admin/users/AddUserView.php";
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
     //creamos el metodo para agregar un usuario
     public function Add(){

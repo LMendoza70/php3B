@@ -11,10 +11,10 @@ class DefaultController{
     //junto con la vista que quiero mostrar
     public function index(){
         //inicializamos vista con la ruta de la pantalla que queremos llamar
-        $vista="app/View/HomeAdminView.php";
+        $vista="app/View/admin/HomeAdminView.php";
         //cargamos la plantilla del administrador que por default se lleva a la variable 
         //vista
-        include_once("app/View/PlantillaAdminView.php");
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
 
     //podriamos tener otros metodos para nuestra pantalla por ejemplo mostrar pantallas de error

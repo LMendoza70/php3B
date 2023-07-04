@@ -5,10 +5,10 @@ class ProductsController{
     //private $modelo;
 
     public function index(){
-        $vista="app/View/HomeProductsView.php";
+        $vista="app/View/admin/products/HomeProductsView.php";
         //$modelo=new ProductsModel();
         //$datos=$modelo->getAll();
-        include_once("app/View/PlantillaAdminView.php");
+        include_once("app/View/admin/PlantillaAdminView.php");
     }
 }
 ?>
