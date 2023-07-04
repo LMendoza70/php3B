@@ -9,7 +9,7 @@
     Nihil ducimus eum minus tempore dolor. Vel nulla consequuntur iure fugit,
     neque consectetur quasi aliquam error qui eligendi quaerat, ut, quis illum!
   </p>
-  <p><a href="">Agregar Nuevo Usuario</a></p>
+  <p><a href="http://localhost/php3b/?C=UserController&M=CallUserAdd">Agregar Nuevo Usuario</a></p>
   <p>
     <table border=1 >
         <thead>
