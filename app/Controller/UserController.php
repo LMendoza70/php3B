@@ -97,7 +97,7 @@ class UserController{
             $modelo=new UserModel();
             $modelo->update($datos);
             //redireccionamos al index de usuarios
-            header("Location:http://localhost/php3a/?c=UserController&m=index");
+            header("Location:http://localhost/php3b/?c=UserController&m=index");
         }
     }
 
