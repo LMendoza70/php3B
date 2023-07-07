@@ -1,10 +1,13 @@
 <div>
   <h2>Agregar nuevo usuario</h2>
   <!--en el metodo action de este formulario llamaremos al metodo Add de nuestro controlador -->
-  <form action="http://localhost/php3b/?C=UserController&M=Add" method="post">
+  <form 
+  action="http://localhost/php3b/?C=UserController&M=Add" 
+  method="post"
+  enctype="multipart/form-data">
     <p>
       <label for="nombre">Nombre : </label><br />
-      <input type="text" name="nombre" id="nombre" placeholder="Nombre" />
+      <input type="text" name="nombre" id="nombre" placeholder="Nombre"/>
     </p>
     <p>
       <label for="apaterno">Apellido Paterno : </label><br />
@@ -42,6 +45,10 @@
     <p>
         <label for="fchnac">Fecha de Nacimiento : </label><br>
         <input type="date" name="fchnac" id="fchnac"  placeholder="dd-mm-aaaa"/>
+    </p>
+    <p>
+      <label for="avatar">Foto de perfil : </label>
+      <input type="file" name="avatar" id="avatar" accept="image/*">
     </p>
     <p><input type="submit" value="Add User"></p>
   </form>

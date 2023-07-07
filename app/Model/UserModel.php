@@ -77,9 +77,9 @@
         //metodo para insertar un usuario
         public function add($user){
             //paso1 creamos la consulta
-            $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento) 
+            $sql="INSERT INTO user(Nombre, ApPaterno, ApMaterno, Usuario, Password, Sexo, FchNacimiento, Avatar) 
             VALUES('".$user['Nombre']."','".$user['ApPaterno']."','".$user['ApMaterno']."',
-            '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."')";
+            '".$user['Usuario']."','".$user['Password']."','".$user['Sexo']."','".$user['FchNacimiento']."','".$user['Avatar']."')";
             //paso 2 conectamos a la base de datos
             $connection =$this->UserConnection->getConnection();
             //paso 3 ejecutamos la consulta
@@ -97,25 +97,10 @@
         }
         
 
-        //Creamos el metodo para eliminar un usuario de la base de datos, este metodo se llamara una vez que 
-        //se haya confirmado la eliminacion del usuario en la vista de index mediante un confirm de javascript
-        public function Delete(){
-            //verificamos que el metodo de envio de datos sea GET
-            if($_SERVER['REQUEST_METHOD']=='GET'){
-                //obtenemos el id del usuario a eliminar
-                $id=$_GET['id'];
-                //llamamos al metodo del modelo que elimina al usuario de la base de datos
-                $modelo=new UserModel();
-                $modelo->delete($id);
-                //redireccionamos al index de usuarios
-                header("Location:http://localhost/php3a/?c=UserController&m=index");
-            }
-        }
-
         //metodo para editar un usuario
         public function update($user){
             //paso1 creamos la consulta
-            $sql="UPDATE user SET Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
+            $sql="UPDATE user SET Avatar='".$user['Avatar']."',Nombre='".$user['Nombre']."', ApPaterno='".$user['ApPaterno']."', 
             ApMaterno='".$user['ApMaterno']."', Usuario='".$user['Usuario']."', Password='".$user['Password']."', 
             Sexo='".$user['Sexo']."', FchNacimiento='".$user['FchNacimiento']."' WHERE IdUser=".$user['IdUser'];
             //paso 2 conectamos a la base de datos
@@ -124,6 +109,25 @@
             $reslt = $connection->query($sql);
             //paso 4 preparamos la respuesta
             if($reslt){
+                $res=true;
+            }else{
+                $res=false;
+            }
+            //paso 5 cerramos la coneccion
+            $this->UserConnection->closeConnection();
+            //paso 6 arrojamos resultados
+            return $res;
+        }
+
+        public function Delete($id){
+            //paso1 creamos la consulta
+            $sql="DELETE FROM user WHERE IdUser=".$id;
+            //paso 2 conectamos a la base de datos
+            $connection =$this->UserConnection->getConnection();
+            //paso 3 ejecutamos la consulta
+            $reslt = $connection->query($sql);
+            //paso 4 preparamos la respuesta
+            if($connection->affected_rows==1){
                 $res=true;
             }else{
                 $res=false;

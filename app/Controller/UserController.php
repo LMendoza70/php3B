@@ -44,6 +44,40 @@ class UserController{
                 'Sexo'=>$_POST['sexo'],
                 'FchNacimiento'=>$_POST['fchnac']
             );
+
+            //procesamiento del archivo
+            if(isset($_FILES['avatar']) && $_FILES['avatar']['error']===UPLOAD_ERR_OK ){
+                //OBTENEMOS LA INFORMACION DEL ARCHIVO CARGADO EN EL FORMULARIO
+                $nombreArchivo=$_FILES['avatar']['name'];
+                $tipoArchivo=$_FILES['avatar']['type'];
+                $tamanoArchivo=$_FILES['avatar']['size'];
+                $rutaTemporal=$_FILES['avatar']['tmp_name'];
+                //validamos que el formato del archivo sea el indicado
+                $extenciones=array('jpg','jpeg','png');
+                $extencion=pathinfo($nombreArchivo,PATHINFO_EXTENSION);
+                if(!in_array($extencion,$extenciones)){
+                    echo "El archivo tiene un formato no valido";
+                    exit;
+                }
+                //validamos el tamaño maximo del archivo
+                $tamanomaximo=2*1024*1024;
+                if($tamanoArchivo>$tamanomaximo){
+                    echo "ya mejor sube un video o una lona";
+                    exit;
+                }
+
+                //definimos el nombre que va a tener la imagen en el servidor 
+                $nombreArchivo= uniqid('Avatar_').'.'.$extencion;
+                //definimos la ruta destino
+                $rutaDestino="app/src/img/avatars/".$nombreArchivo;
+                //movemos el archivo de la tura temporal al destino final
+                if(!move_uploaded_file($rutaTemporal,$rutaDestino)){
+                    echo "Error al cargar el archivo al servidor";
+                    exit;
+                }
+                //ahora si incluimos el nombre al arreglo que se almacena en la bd
+                $datos['Avatar']=$nombreArchivo;
+            }
             //creamos una instancia de UserModel
             $modelo=new UserModel();
             //llamamos al metodo add
@@ -91,8 +125,50 @@ class UserController{
                 'Usuario'=>$_POST['user'],
                 'Password'=>$_POST['password'],
                 'Sexo'=>$_POST['sexo'],
-                'FchNacimiento'=>$_POST['fchnac']
+                'FchNacimiento'=>$_POST['fchnac'],
+                'Avatar'=>$_POST['avatar']
             );
+            //procesamiento del archivo
+            if(isset($_FILES['avatar']) && $_FILES['avatar']['error']===UPLOAD_ERR_OK ){
+                //OBTENEMOS LA INFORMACION DEL ARCHIVO CARGADO EN EL FORMULARIO
+                $nombreArchivo=$_FILES['avatar']['name'];
+                $tipoArchivo=$_FILES['avatar']['type'];
+                $tamanoArchivo=$_FILES['avatar']['size'];
+                $rutaTemporal=$_FILES['avatar']['tmp_name'];
+                //validamos que el formato del archivo sea el indicado
+                $extenciones=array('jpg','jpeg','png');
+                $extencion=pathinfo($nombreArchivo,PATHINFO_EXTENSION);
+                if(!in_array($extencion,$extenciones)){
+                    echo "El archivo tiene un formato no valido";
+                    exit;
+                }
+                //validamos el tamaño maximo del archivo
+                $tamanomaximo=2*1024*1024;
+                if($tamanoArchivo>$tamanomaximo){
+                    echo "ya mejor sube un video o una lona";
+                    exit;
+                }
+
+                //definimos el nombre que va a tener la imagen en el servidor 
+                $nombreArchivo= uniqid('Avatar_').'.'.$extencion;
+                //definimos la ruta destino
+                $rutaDestino="app/src/img/avatars/".$nombreArchivo;
+                //movemos el archivo de la tura temporal al destino final
+                if(!move_uploaded_file($rutaTemporal,$rutaDestino)){
+                    echo "Error al cargar el archivo al servidor";
+                    exit;
+                }
+                //eliminamos el archivo anterior
+                //obtengo los datos originales para tener el nombre de la imagen anterior
+                $this->modelo=new UserModel();
+                $anterior=$this->modelo->getById($_POST['id']);
+                if(!empty($anterior['Avatar'])){
+                    unlink("app/src/img/avatars/".$anterior['Avatar']);
+                }
+                //ahora si incluimos el nombre al arreglo que se almacena en la bd
+                $datos['Avatar']=$nombreArchivo;
+            }
+
             //llamamos al metodo del modelo que actualiza los datos del usuario
             $modelo=new UserModel();
             $modelo->update($datos);
@@ -100,6 +176,28 @@ class UserController{
             header("Location:http://localhost/php3b/?C=UserController&M=index");
         }
     }
+
+    //Creamos el metodo para eliminar un usuario de la base de datos, este metodo se llamara una vez que 
+        //se haya confirmado la eliminacion del usuario en la vista de index mediante un confirm de javascript
+        public function Delete(){
+            //verificamos que el metodo de envio de datos sea GET
+            if($_SERVER['REQUEST_METHOD']=='GET'){
+                //obtenemos el id del usuario a eliminar
+                $id=$_GET['id'];
+                //llamamos al metodo del modelo que elimina al usuario de la base de datos
+                $this->modelo=new UserModel();
+                $dato=$this->modelo->getById($_GET['id']);
+                $modelo2=new UserModel();
+                if($modelo2->Delete($id)){
+                    if(!empty($dato['Avatar'])){
+                        unlink("app/src/img/avatars/".$anterior['Avatar']);
+                    }
+                }
+                
+                //redireccionamos al index de usuarios
+                header("Location:http://localhost/php3b/?c=UserController&m=index");
+            }
+        }
 
 
 }
