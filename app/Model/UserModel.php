@@ -56,7 +56,7 @@
         //metodo que nos permita hacer un logueo
         public function getCredenctials($us,$ps){
             //paso 1 creo la consulta
-            $sql="SELECT * FROM user WHERE Usuario = $us AND Password = $ps";
+            $sql="SELECT * FROM user WHERE Usuario = '$us' AND Password = '$ps'";
             //paso 2 obtengo la coneccion a la base de datos 
             $connection =$this->UserConnection->getConnection();
             //paso 3 ejecuto la consulta 
@@ -138,4 +138,3 @@
             return $res;
         }
     }
-?>
